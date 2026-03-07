@@ -1,5 +1,8 @@
 # Thin Docker Dev Shell
 
+[![Docker Build Check](https://github.com/xrf9268-hue/thin-devbox-shell/actions/workflows/docker-build-check.yml/badge.svg)](https://github.com/xrf9268-hue/thin-devbox-shell/actions/workflows/docker-build-check.yml)
+[![Docker Build](https://github.com/xrf9268-hue/thin-devbox-shell/actions/workflows/docker-build.yml/badge.svg)](https://github.com/xrf9268-hue/thin-devbox-shell/actions/workflows/docker-build.yml)
+
 A thin, language-agnostic Docker shell for day-to-day project work on:
 
 - Windows with WSL2 and Antigravity
@@ -133,6 +136,7 @@ GitHub Actions runs two minimal Docker checks on pushes to `main`, pull requests
 - `Docker Build`: equivalent to `docker build --pull .`
 
 These workflows only validate the shared shell image. They do not install or test project-specific runtimes.
+Both workflows run with read-only repository permissions (`contents: read`).
 
 ## Public Interface
 
