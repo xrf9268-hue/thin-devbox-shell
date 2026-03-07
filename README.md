@@ -196,6 +196,30 @@ Both workflows run with read-only repository permissions (`contents: read`).
 
 If a project needs Node, Rust, Go, Python, Java, or other tooling, that project should install and manage it itself.
 
+## FAQ
+
+### Why not bake Node, Python, Go, or Rust into the image?
+
+Because this layer is meant to stay thin, stable, and reusable across unrelated projects.
+Language runtimes change faster than the shared shell should.
+If a project needs a runtime, that project should define and version it explicitly.
+
+### Why not use a devcontainer instead?
+
+Because this repository is intentionally smaller in scope.
+It provides one reusable shell layer for Codex-driven project work without introducing editor-specific configuration or a per-project template model.
+If a project needs a full devcontainer, that project can still add one separately.
+
+### When should a project use its own dedicated development image?
+
+Use a project-specific image when the project needs one or more of the following:
+
+- A fixed language runtime or toolchain
+- System packages beyond this shared shell
+- Reproducible setup for a team or CI job
+- Long-lived background services or port mappings
+- Project-specific bootstrap logic that would be wrong to share globally
+
 ## Host Setup
 
 - Windows and WSL2: `docs/windows-wsl.md`
