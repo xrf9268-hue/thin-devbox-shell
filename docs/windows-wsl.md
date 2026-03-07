@@ -1,4 +1,4 @@
-# Windows, WSL2, and Antigravity
+# Windows and WSL2
 
 Use this workflow on Windows:
 
@@ -6,7 +6,7 @@ Use this workflow on Windows:
 2. Install Docker Desktop and use Linux containers with the WSL 2 backend.
 3. Enable WSL integration for your Linux distribution in Docker Desktop.
 4. Keep active projects in the WSL filesystem, for example `~/projects`.
-5. Open the project from its WSL path in the host Codex app or Antigravity.
+5. Open the project from its WSL path in the host Codex app.
 6. Run all `devbox` and Docker commands from a WSL shell that is already inside the current repository or worktree.
 
 Recommended project location:
@@ -50,5 +50,5 @@ DEVBOX_HOME_VOLUME=devbox-home-my-project devbox
 Notes:
 
 - Keep the project in the Linux filesystem, not in `C:\...`, for better file-system behavior with Docker Desktop.
-- The host editor or Codex app should open the WSL-backed project path and use a WSL terminal for commands.
+- Treat the Codex app as the primary control surface. If you also use an editor, point it at the same WSL-backed project path and run commands from WSL.
 - Project-specific runtimes and dependencies stay in the project's own setup, not in this shell.

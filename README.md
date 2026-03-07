@@ -5,8 +5,8 @@
 
 A thin, language-agnostic Docker shell for day-to-day project work on:
 
-- Windows with WSL2 and Antigravity
-- macOS with Antigravity
+- Windows with WSL2 and the Codex app
+- macOS with the Codex app
 
 The image includes only common command-line tools. Each project keeps control of its own runtime, package manager, and dependency setup.
 
@@ -60,8 +60,8 @@ DEVBOX_HOME_VOLUME=devbox-home-myrepo devbox
 - `Dockerfile`: base image for `devbox-shell`
 - `devbox`: wrapper that builds and runs the shell
 - `install-devbox.sh`: installs a small launcher into `~/.local/bin`
-- `docs/windows-wsl-antigravity.md`: Windows and WSL2 host guidance
-- `docs/macos-antigravity.md`: macOS host guidance
+- `docs/windows-wsl.md`: Windows and WSL2 host guidance
+- `docs/macos.md`: macOS host guidance
 
 Installed tools:
 
@@ -158,5 +158,5 @@ If a project needs Node, Rust, Go, Python, Java, or other tooling, that project 
 
 ## Host Setup
 
-- Windows and WSL2: `docs/windows-wsl-antigravity.md`
-- macOS: `docs/macos-antigravity.md`
+- Windows and WSL2: `docs/windows-wsl.md`
+- macOS: `docs/macos.md`

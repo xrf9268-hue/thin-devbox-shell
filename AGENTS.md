@@ -49,7 +49,7 @@ If you are validating the installed launcher in WSL or macOS:
 ## Documentation rules
 
 - Update `README.md` when public workflow or positioning changes.
-- Update `docs/windows-wsl-antigravity.md` and `docs/macos-antigravity.md` when host setup or usage changes.
+- Update `docs/windows-wsl.md` and `docs/macos.md` when host setup or usage changes.
 - Keep `README.md` concise for humans; put agent-specific operating guidance here.
 
 ## Non-goals

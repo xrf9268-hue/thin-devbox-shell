@@ -1,10 +1,10 @@
-# macOS and Antigravity
+# macOS
 
 Use this workflow on macOS:
 
 1. Install Docker Desktop for Mac.
 2. Keep active projects under your home directory, for example `~/projects`.
-3. Open the project directly from that local path in the host Codex app or Antigravity.
+3. Open the project directly from that local path in the host Codex app.
 4. Run all `devbox` and Docker commands from the macOS terminal that is already inside the current repository or worktree.
 
 Recommended project location:
@@ -43,4 +43,5 @@ Notes:
 
 - Prefer normal local directories under your home folder for bind mounts.
 - For very large repositories or heavy watch workflows, Docker Desktop Synchronized file shares can help if your Docker plan includes that feature.
+- Treat the Codex app as the primary control surface. If you also use an editor, point it at the same local project path and run commands from the host terminal.
 - Project-specific runtimes and dependencies stay in the project's own setup, not in this shell.
