@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_dir="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+repo_root="${script_dir}"
+image_name="${DEVBOX_IMAGE:-devbox-shell}"
+home_volume="${DEVBOX_HOME_VOLUME:-devbox-home}"
+dockerfile="${repo_root}/Dockerfile"
+
+build_image() {
+  docker build \
+    --tag "${image_name}" \
+    --file "${dockerfile}" \
+    "${repo_root}"
+}
+
+if [[ "${1:-}" == "--rebuild" ]]; then
+  build_image
+  shift
+elif ! docker image inspect "${image_name}" >/dev/null 2>&1; then
+  build_image
+fi
+
+if [[ $# -eq 0 ]]; then
+  set -- bash
+elif [[ "${1}" == -* ]]; then
+  set -- bash "$@"
+fi
+
+tty_args=()
+if [[ -t 0 && -t 1 ]]; then
+  tty_args=(-it)
+fi
+
+docker run --rm \
+  "${tty_args[@]}" \
+  --mount "type=bind,src=${PWD},dst=/workspace" \
+  --mount "type=volume,src=${home_volume},dst=/home/dev" \
+  --workdir /workspace \
+  "${image_name}" \
+  "$@"
