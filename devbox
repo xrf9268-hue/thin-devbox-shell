@@ -9,6 +9,7 @@ dockerfile="${repo_root}/Dockerfile"
 
 build_image() {
   docker build \
+    --pull \
     --tag "${image_name}" \
     --file "${dockerfile}" \
     "${repo_root}"

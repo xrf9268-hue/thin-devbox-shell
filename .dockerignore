@@ -1,0 +1,9 @@
+.git
+.github
+.DS_Store
+Thumbs.db
+*.log
+README.md
+devbox
+install-devbox.sh
+docs/
