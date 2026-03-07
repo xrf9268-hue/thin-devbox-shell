@@ -120,6 +120,45 @@ devbox
 # inside the shell, use the setup defined by the project itself
 ```
 
+## Developing a Project
+
+Use the shell as a thin execution layer, not as a project template.
+
+1. Open the repository or worktree in the host Codex app.
+2. Open a terminal in that exact repository or worktree directory.
+3. Run `devbox`.
+4. Inside the container, run the setup, build, test, and debug commands defined by that project.
+5. Exit with `exit` when you are done. Re-enter with `devbox` from the same directory.
+
+Example:
+
+```bash
+# host terminal
+cd ~/projects/my-project
+devbox
+
+# inside /workspace in the container
+git status
+make test
+```
+
+What persists:
+
+- Files under `/workspace` are the files from your host repository or worktree.
+- Files under `/home/dev` persist in the Docker volume `devbox-home` and are suitable for shell history or user-level cache state.
+
+What does not happen automatically:
+
+- No language runtime is installed for you.
+- No per-project bootstrap runs for you.
+- No ports, SSH agent, or editor integration are injected for you.
+
+If a project or this shared shell changes:
+
+- Rerun `devbox` for normal project changes.
+- Run `devbox --rebuild` after changing the shared image or launcher behavior.
+- Set `DEVBOX_HOME_VOLUME=...` when you want isolated shell state per repository or per worktree.
+
 ## How It Works
 
 - The current directory is mounted to `/workspace`

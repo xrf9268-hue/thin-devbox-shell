@@ -37,6 +37,20 @@ devbox
 devbox bash -lc "git --version && pwd"
 ```
 
+Project development loop:
+
+1. Open the repository or worktree in the host Codex app.
+2. Open a WSL terminal in that exact directory.
+3. Run `devbox`.
+4. Inside the container, use the commands defined by the project itself.
+5. Exit with `exit` and rerun `devbox` from the same directory when needed.
+
+Inside the container:
+
+- `/workspace` is your mounted repository or worktree.
+- `/home/dev` is persistent shell state stored in a Docker volume.
+- Language runtimes and project dependencies remain the responsibility of the project.
+
 Codex app workflow:
 
 - Open the repository from its WSL path in the host Codex app.

@@ -54,6 +54,7 @@ If you are validating the installed launcher in WSL or macOS:
 - Update `README.md` when public workflow or positioning changes.
 - Update `docs/windows-wsl.md` and `docs/macos.md` when host setup or usage changes.
 - Keep `README.md` concise for humans; put agent-specific operating guidance here.
+- Keep the project-development loop explicit in human-facing docs, not just shell setup.
 
 ## Non-goals
 
