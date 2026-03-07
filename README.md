@@ -1,11 +1,30 @@
 # Thin Docker Dev Shell
 
-Thin, language-agnostic Docker shell for day-to-day project work on:
+A thin, language-agnostic Docker shell for day-to-day project work on:
 
 - Windows with WSL2 and Antigravity
 - macOS with Antigravity
 
-It is intentionally small. The image includes only common command-line tools and does not bake in `node`, `python`, `go`, `rust`, or any other language runtime. Each project keeps control of its own toolchain and dependency setup.
+简述：这是一个尽量薄、尽量通用的开发壳。
+
+- 不预装 `node`、`python`、`go`、`rust` 等语言运行时
+- 不提供项目模板、bootstrap 钩子或语言假设
+- 只提供一层稳定、轻量、可复用的 Docker shell
+
+The image includes only common command-line tools. Each project keeps control of its own runtime, package manager, and dependency setup.
+
+## Overview
+
+Use `devbox` as the shared shell, and let each project decide how to install its own toolchain.
+
+```mermaid
+flowchart LR
+    A["Host: Windows WSL2 or macOS"] --> B["Project directory"]
+    B --> C["devbox wrapper"]
+    C --> D["devbox-shell image"]
+    D --> E["Container shell (/workspace)"]
+    E --> F["Project-managed runtimes and dependencies"]
+```
 
 ## Why This Exists
 
@@ -13,6 +32,7 @@ It is intentionally small. The image includes only common command-line tools and
 - Keep the base image light and easy to maintain
 - Avoid devcontainer sprawl, project templates, and runtime-specific assumptions
 - Work the same way on WSL2 and macOS
+- Let each repository own its own setup instead of hiding it in a shared image
 
 ## What Is Included
 
@@ -33,6 +53,14 @@ Installed tools:
 - `tini`
 - `unzip`
 - `xz-utils`
+
+## Design Rules
+
+- Thin base image first
+- No language runtime baked in
+- No project-specific automation in the shared shell
+- Cross-platform shell workflow over editor-specific integration
+- Make the common layer boring, stable, and easy to replace
 
 ## Quick Start
 
@@ -61,6 +89,14 @@ Force a rebuild of the image:
 devbox --rebuild
 ```
 
+Typical project flow:
+
+```bash
+cd ~/projects/my-project
+devbox
+# inside the shell, use the setup defined by the project itself
+```
+
 ## How It Works
 
 - The current directory is mounted to `/workspace`
@@ -83,6 +119,7 @@ devbox --rebuild
 - No language-specific bootstrap hooks
 - No automatic runtime installation
 - No per-project system package management
+- No hidden magic beyond "mount this directory and give me a clean shell"
 
 If a project needs Node, Rust, Go, Python, Java, or other tooling, that project should install and manage it itself.
 
