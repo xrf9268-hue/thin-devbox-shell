@@ -17,7 +17,7 @@ cd ~/projects
 Install the launcher from the checked-out repository:
 
 ```bash
-cd /path/to/setup
+cd /path/to/thin-devbox-shell
 bash ./install-devbox.sh
 ```
 

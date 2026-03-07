@@ -19,8 +19,14 @@ cd ~/projects
 Install the launcher from the checked-out repository:
 
 ```bash
-cd /mnt/c/developer/setup
+cd /path/to/thin-devbox-shell
 bash ./install-devbox.sh
+```
+
+If the repository lives on the Windows filesystem, the WSL path will usually look like:
+
+```bash
+cd /mnt/c/path/to/thin-devbox-shell
 ```
 
 Use it inside a project:
