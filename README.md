@@ -60,6 +60,7 @@ DEVBOX_HOME_VOLUME=devbox-home-myrepo devbox
 - `Dockerfile`: base image for `devbox-shell`
 - `devbox`: wrapper that builds and runs the shell
 - `install-devbox.sh`: installs a small launcher into `~/.local/bin`
+- `docs/consumer-repo-contract.md`: boundaries for repositories that use this shell
 - `docs/windows-wsl.md`: Windows and WSL2 host guidance
 - `docs/macos.md`: macOS host guidance
 
@@ -84,6 +85,20 @@ Installed tools:
 - Cross-platform shell workflow over editor-specific integration
 - Codex app on the host, reusable shell from the current repo or worktree
 - Make the common layer boring, stable, and easy to replace
+
+## Consumer Repositories
+
+Treat `devbox` as an optional execution layer, not as a project template or a
+repository policy engine.
+
+Repositories that use this shell should keep their own:
+
+- setup and prerequisite docs
+- build, test, and release workflows
+- CI rules and branch policies
+- agent prompts, AGENTS guidance, and task-specific scripts
+
+See `docs/consumer-repo-contract.md` for the generic integration contract.
 
 ## Quick Start
 
