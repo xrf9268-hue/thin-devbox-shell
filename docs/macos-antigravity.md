@@ -4,8 +4,8 @@ Use this workflow on macOS:
 
 1. Install Docker Desktop for Mac.
 2. Keep active projects under your home directory, for example `~/projects`.
-3. Open the project directly from that local path in Antigravity.
-4. Run all `devbox` and Docker commands from the macOS terminal.
+3. Open the project directly from that local path in the host Codex app or Antigravity.
+4. Run all `devbox` and Docker commands from the macOS terminal that is already inside the current repository or worktree.
 
 Recommended project location:
 
@@ -27,6 +27,16 @@ Use it inside a project:
 cd ~/projects/my-project
 devbox
 devbox bash -lc "git --version && pwd"
+```
+
+Codex app workflow:
+
+- Open the repository from its local path in the host Codex app.
+- If Codex creates a worktree or isolated copy for a task, open a terminal in that exact directory before running `devbox`.
+- If you want separate shell state per repository or worktree, override the default volume:
+
+```bash
+DEVBOX_HOME_VOLUME=devbox-home-my-project devbox
 ```
 
 Notes:

@@ -7,6 +7,8 @@ A thin, language-agnostic Docker shell for day-to-day project work on:
 
 The image includes only common command-line tools. Each project keeps control of its own runtime, package manager, and dependency setup.
 
+The primary workflow is host-first: use the Codex app on the host machine to open the repository, supervise agents, review diffs, and manage parallel tasks. Use `devbox` when you or an agent need a consistent shell inside the current repository or worktree.
+
 ## Overview
 
 Use `devbox` as the shared shell, and let each project decide how to install its own toolchain.
@@ -18,6 +20,28 @@ flowchart LR
     C --> D["devbox-shell image"]
     D --> E["Container shell (/workspace)"]
     E --> F["Project-managed runtimes and dependencies"]
+```
+
+## Codex App Workflow
+
+Use the Codex app as the main control surface for development work:
+
+1. Open the repository in the host Codex app.
+2. Let Codex manage tasks, diffs, and parallel work from the host.
+3. When a task needs a reproducible shell, open a terminal in the current repository or worktree.
+4. Run `devbox` from that exact directory.
+
+Examples:
+
+```bash
+devbox
+devbox bash -lc "git status"
+```
+
+If you want shell state isolated per project or per worktree, set a different home volume:
+
+```bash
+DEVBOX_HOME_VOLUME=devbox-home-myrepo devbox
 ```
 
 ## Why This Exists
@@ -54,6 +78,7 @@ Installed tools:
 - No language runtime baked in
 - No project-specific automation in the shared shell
 - Cross-platform shell workflow over editor-specific integration
+- Codex app on the host, reusable shell from the current repo or worktree
 - Make the common layer boring, stable, and easy to replace
 
 ## Quick Start
@@ -97,6 +122,7 @@ devbox
 - `/home/dev` is stored in the named Docker volume `devbox-home`
 - The image is built automatically on first run
 - The default container user is `dev`
+- Run `devbox` from the repository or worktree you want the shell to operate on
 - No ports, SSH agents, or language-specific environment variables are injected automatically
 
 ## Public Interface
