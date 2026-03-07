@@ -45,6 +45,7 @@ If you are validating the installed launcher in WSL or macOS:
 - `~/.local/bin/devbox whoami`
 - `~/.local/bin/devbox pwd`
 - `~/.local/bin/devbox git --version`
+- `~/.local/bin/devbox rg --version`
 
 ## Documentation rules
 

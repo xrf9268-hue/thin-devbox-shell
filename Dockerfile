@@ -9,6 +9,7 @@ RUN apt-get update \
         make \
         openssh-client \
         procps \
+        ripgrep \
         tini \
         unzip \
         xz-utils \

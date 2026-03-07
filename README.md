@@ -71,6 +71,7 @@ Installed tools:
 - `make`
 - `openssh-client`
 - `procps`
+- `ripgrep`
 - `tini`
 - `unzip`
 - `xz-utils`
