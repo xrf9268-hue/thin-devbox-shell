@@ -5,12 +5,6 @@ A thin, language-agnostic Docker shell for day-to-day project work on:
 - Windows with WSL2 and Antigravity
 - macOS with Antigravity
 
-简述：这是一个尽量薄、尽量通用的开发壳。
-
-- 不预装 `node`、`python`、`go`、`rust` 等语言运行时
-- 不提供项目模板、bootstrap 钩子或语言假设
-- 只提供一层稳定、轻量、可复用的 Docker shell
-
 The image includes only common command-line tools. Each project keeps control of its own runtime, package manager, and dependency setup.
 
 ## Overview
