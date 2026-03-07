@@ -6,6 +6,8 @@ repo_root="${script_dir}"
 image_name="${DEVBOX_IMAGE:-devbox-shell}"
 home_volume="${DEVBOX_HOME_VOLUME:-devbox-home}"
 dockerfile="${repo_root}/Dockerfile"
+workspace_source="${PWD}"
+workspace_link_dir=""
 
 build_image() {
   docker build \
@@ -15,12 +17,34 @@ build_image() {
     "${repo_root}"
 }
 
+cleanup() {
+  if [[ -n "${workspace_link_dir}" ]]; then
+    rm -rf "${workspace_link_dir}"
+  fi
+}
+
+prepare_workspace_source() {
+  # Docker parses --mount as comma-separated key=value fields. When the
+  # working directory contains commas or line breaks, bind through a safe
+  # temporary symlink instead of interpolating the path directly.
+  case "${PWD}" in
+    *","*|*$'\n'*|*$'\r'*)
+      workspace_link_dir="$(mktemp -d "${TMPDIR:-/tmp}/devbox-workspace.XXXXXX")"
+      ln -s "${PWD}" "${workspace_link_dir}/workspace"
+      workspace_source="${workspace_link_dir}/workspace"
+      trap cleanup EXIT
+      ;;
+  esac
+}
+
 if [[ "${1:-}" == "--rebuild" ]]; then
   build_image
   shift
 elif ! docker image inspect "${image_name}" >/dev/null 2>&1; then
   build_image
 fi
+
+prepare_workspace_source
 
 if [[ $# -eq 0 ]]; then
   set -- bash
@@ -35,7 +59,7 @@ fi
 
 docker run --rm \
   "${tty_args[@]}" \
-  --mount "type=bind,src=${PWD},dst=/workspace" \
+  --mount "type=bind,src=${workspace_source},dst=/workspace" \
   --mount "type=volume,src=${home_volume},dst=/home/dev" \
   --workdir /workspace \
   "${image_name}" \

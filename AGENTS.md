@@ -30,6 +30,7 @@ Do not treat it as a project template or a language runtime image.
 - Do not hardcode machine-specific paths in docs.
 - Keep the host-first model: Codex app on the host, `devbox` as the reusable shell layer.
 - Preserve cross-platform Bash behavior for WSL2 and macOS.
+- Pin third-party GitHub Actions to full commit SHAs.
 
 ## Validation commands
 
