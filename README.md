@@ -125,6 +125,15 @@ devbox
 - Run `devbox` from the repository or worktree you want the shell to operate on
 - No ports, SSH agents, or language-specific environment variables are injected automatically
 
+## CI
+
+GitHub Actions runs two minimal Docker checks on pushes to `main`, pull requests, and manual dispatch:
+
+- `Docker Build Check`: equivalent to `docker build --check .`
+- `Docker Build`: equivalent to `docker build --pull .`
+
+These workflows only validate the shared shell image. They do not install or test project-specific runtimes.
+
 ## Public Interface
 
 - `devbox`
